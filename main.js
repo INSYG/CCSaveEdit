@@ -11,44 +11,56 @@ document.getElementById("itemlist").innerHTML = itemstr;
 
 function load() {
     updateFromFile();
+    document.getElementById("onload").click();
     alert("Save loaded.");
 }
 
 function updateFromFile() {
-    var s = document.getElementById("loadtext").value;
+    var s = gVal("loadtext");
     saveFile = JSON.parse(inc(s, "a"));
-    document.getElementById("savedecrypted").value = inc(s, "a");
-    document.getElementById("savespaced").value = JSON.stringify(JSON.parse(inc(s, "a")), null, 4);
+    gEle("savedecrypted").value = inc(s, "a");
+    gEle("savespaced").value = JSON.stringify(JSON.parse(inc(s, "a")), null, 4);
 
     var player = saveFile.player;
-    document.getElementById("level").value = player.level;
-    document.getElementById("exp").value = player.exp;
-    document.getElementById("hp").value = player.hp;
-    document.getElementById("credits").value = player.credit;
-    document.getElementById("head").value = getItemNameById(player.equip.head);
-    document.getElementById("leftarm").value = getItemNameById(player.equip.leftArm);
-    document.getElementById("rightarm").value = getItemNameById(player.equip.rightArm);
-    document.getElementById("torso").value = getItemNameById(player.equip.torso);
-    document.getElementById("feet").value = getItemNameById(player.equip.feet);
-    document.getElementById("onload").click();
+    gEle("level").value = player.level;
+    gEle("exp").value = player.exp;
+    gEle("hp").value = player.hp;
+    gEle("credits").value = player.credit;
+    gEle("sp").value = player.spLevel;
+    gEle("skillneutral").value = player.skillPoints[0];
+    gEle("skillheat").value = player.skillPoints[1];
+    gEle("skillcold").value = player.skillPoints[2];
+    gEle("skillshock").value = player.skillPoints[3];
+    gEle("skillwave").value = player.skillPoints[4];
+    gEle("head").value = getItemNameById(player.equip.head);
+    gEle("leftarm").value = getItemNameById(player.equip.leftArm);
+    gEle("rightarm").value = getItemNameById(player.equip.rightArm);
+    gEle("torso").value = getItemNameById(player.equip.torso);
+    gEle("feet").value = getItemNameById(player.equip.feet);
 
     for (var i = 0; i < items.length; i++) {
         if (i >= player.items.length) player.items[i] == null;
-        document.getElementById("item" + i).value = player.items[i];
+        gEle("item" + i).value = player.items[i];
     }
 }
 
 function updateFromPlayer() {
     var player = saveFile.player;
-    player.level = document.getElementById("level").value;
-    player.exp = document.getElementById("exp").value;
-    player.hp = document.getElementById("hp").value;
-    player.credit = document.getElementById("credits").value;
-    player.equip.head = getItemIdByName(document.getElementById("head").value);
-    player.equip.leftArm = getItemIdByName(document.getElementById("leftarm").value);
-    player.equip.rightArm = getItemIdByName(document.getElementById("rightarm").value);
-    player.equip.torso = getItemIdByName(document.getElementById("torso").value);
-    player.equip.feet = getItemIdByName(document.getElementById("feet").value);
+    player.level = gVal("level");
+    player.exp = gVal("exp");
+    player.hp = gVal("hp");
+    player.credit = gVal("credits");
+    player.spLevel = gVal("sp");
+    player.skillPoints[0] = gVal("skillneutral");
+    player.skillPoints[1] = gVal("skillheat");
+    player.skillPoints[2] = gVal("skillcold");
+    player.skillPoints[3] = gVal("skillshock");
+    player.skillPoints[4] = gVal("skillwave");
+    player.equip.head = getItemIdByName(gVal("head"));
+    player.equip.leftArm = getItemIdByName(gVal("leftarm"));
+    player.equip.rightArm = getItemIdByName(gVal("rightarm"));
+    player.equip.torso = getItemIdByName(gVal("torso"));
+    player.equip.feet = getItemIdByName(gVal("feet"));
 
     saveFile.player = player;
     updateTextareas();
@@ -66,21 +78,21 @@ function updateFromInventory() {
 }
 
 function updateFromDecrypted() {
-    document.getElementById("loadtext").value = outc(JSON.stringify(JSON.parse(document.getElementById("savedecrypted").value)), "a");
+    gEle("loadtext").value = outc(JSON.stringify(JSON.parse(gVal("savedecrypted"))), "a");
     updateFromFile();
     alert("Save file updated.");
 }
 
 function updateFromSpaced() {
-    document.getElementById("loadtext").value = outc(JSON.stringify(JSON.parse(document.getElementById("savespaced").value)), "a");
+    gEle("loadtext").value = outc(JSON.stringify(JSON.parse(gVal("savespaced"))), "a");
     updateFromFile();
     alert("Save file updated.");
 }
 
 function updateTextareas() {
-    document.getElementById("savedecrypted").value = JSON.stringify(saveFile);
-    document.getElementById("savespaced").value = JSON.stringify(saveFile, null, 4);
-    document.getElementById("loadtext").value = outc(JSON.stringify(saveFile), "a");
+    gEle("savedecrypted").value = JSON.stringify(saveFile);
+    gEle("savespaced").value = JSON.stringify(saveFile, null, 4);
+    gEle("loadtext").value = outc(JSON.stringify(saveFile), "a");
 }
 
 function getItemNameById(n) {
@@ -95,6 +107,9 @@ function getItemIdByName(s) {
     }
     return -1;
 }
+
+function gVal(i) { return document.getElementById(i).value; }
+function gEle(i) { return document.getElementById(i); }
 
 function inc(a, b) {
     if (b = 75 * b + "0") b = ":_." + b;

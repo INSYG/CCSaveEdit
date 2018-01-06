@@ -18,6 +18,11 @@ div.textBoxAlignEquip {
     height: 25px
 }
 
+div.textBoxAlignFlags {
+    width: 250px;
+    height: 25px
+}
+
 input.textBoxAlign {
     float: right;
     width: 55px;
@@ -33,6 +38,11 @@ input.textBoxAlignItem {
 input.textBoxAlignEquip {
     float: right;
     width: 150px;
+}
+
+input.textBoxAlignFlags {
+    float: right;
+    width: 100px;
 }
 
 /* Style the tab */

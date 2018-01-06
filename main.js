@@ -1,13 +1,50 @@
 var saveFile;
 var items = itemj.items;
+var invsort = [[],[],[],[],[],[],[],[]];
 
 document.getElementById("default").click();
+document.getElementById("defaultinv").click();
 
-var itemstr = "";
 for (var i = 0; i < items.length; i++) {
-    itemstr += '<div class="textBoxAlignItem">' + items[i].name.en_US + '<input id="item' + i + '" type="text" class="textBoxAlignItem"></div>';
+    var cat;
+    
+    if (items[i].icon === "item-helm") cat = 0;
+    else if (items[i].icon === "item-sword") cat = 1;
+    else if (items[i].icon === "item-belt") cat = 2;
+    else if (items[i].icon === "item-shoe") cat = 3;
+    else if (items[i].icon === "item-items") cat = 4;
+    else if (items[i].icon === "item-key") cat = 5;
+    else if (items[i].icon === "item-trade") cat = 6;
+    else cat = 7;
+
+    var aaaa = {
+        "ind": i,
+        "i": items[i]
+    }
+    
+    invsort[cat].push(aaaa);
 }
-document.getElementById("itemlist").innerHTML = itemstr;
+
+var itemCount = 0;
+for (var i = 0; i < invsort.length; i++) {
+    var itemstr = "";
+    for (var j = 0; j < invsort[i].length; j++) {
+        var type = "";
+        var item = invsort[i][j].i;
+        if (i === 0) type = "head";
+        else if (i === 1) type = "weap";
+        else if (i === 2) type = "torso";
+        else if (i === 3) type = "feet";
+        else if (i === 4) type = "cons";
+        else if (i === 5) type = "key";
+        else if (i === 6) type = "trade";
+        else type = "other";
+        itemstr += '<div class="textBoxAlignItem"><img src="icon/' + type + item.rarity + '.png"> ' + item.name.en_US + '<input id="item' + invsort[i][j].ind + '" type="text" class="textBoxAlignItem"></div>';
+        itemCount++;
+    }
+    document.getElementById("itemlist" + i).innerHTML = itemstr;
+}
+
 
 function load() {
     updateFromFile();
@@ -37,6 +74,16 @@ function updateFromFile() {
     gEle("rightarm").value = getItemNameById(player.equip.rightArm);
     gEle("torso").value = getItemNameById(player.equip.torso);
     gEle("feet").value = getItemNameById(player.equip.feet);
+
+    /*var flags = saveFile.vars.storage.maps;
+    gEle("bossCold1").checked = flags["coldDng/b3/room7"].bossKilled;
+    gEle("bossCold2").checked = flags["coldDng/g/boss"].bossKill;
+    gEle("bossHeat1").checked = flags["heatDng/f1/midboss"].midbossDefeated;
+    gEle("bossHeat2").checked = flags["heatDng/f4/boss"].bossKill;
+    gEle("bossWave").checked = flags["waveDng/b1/boss"].bossDefeated;
+    gEle("bossShock").checked = flags["shockDng/f3/roomBoss"].bossDefeated;
+    gEle("bossGrand1").checked = flags["treeDng/f2/room-01"].apeDefeated;
+    gEle("bossGrand2").checked = flags["treeDng/f4/boss"].apeDefeated;*/
 
     for (var i = 0; i < items.length; i++) {
         if (i >= player.items.length) player.items[i] == null;
@@ -76,6 +123,22 @@ function updateFromInventory() {
     updateTextareas();
     alert("Inventory updated.");
 }
+
+/*function updateFromFlags() {
+    var flags = saveFile.vars.storage.maps;
+    flags["coldDng/b3/room7"].bossKilled = gEle("bossCold1").checked;
+    flags["coldDng/g/boss"].bossKill = gEle("bossCold2").checked;
+    flags["heatDng/f1/midboss"].midbossDefeated = gEle("bossHeat1").checked;
+    flags["heatDng/f4/boss"].bossKill = gEle("bossHeat2").checked;
+    flags["waveDng/b1/boss"].bossDefeated = gEle("bossWave").checked;
+    flags["shockDng/f3/roomBoss"].bossDefeated = gEle("bossShock").checked;
+    flags["treeDng/f2/room-01"].apeDefeated = gEle("bossGrand1").checked;
+    flags["treeDng/f4/boss"].apeDefeated = gEle("bossGrand2").checked;
+
+    saveFile.vars.storage.maps = flags;
+    updateTextareas();
+    alert("Flags updated.");
+}*/
 
 function updateFromDecrypted() {
     gEle("loadtext").value = outc(JSON.stringify(JSON.parse(gVal("savedecrypted"))), "a");
@@ -127,12 +190,12 @@ function outc(a, b) {
 }
 
 //tab stuff
-function changeTab(evt, tab) {
+function changeTab(evt, cl, tab) {
     // Declare all variables
     var i, tabcontent, tablinks;
 
     // Get all elements with class="tabcontent" and hide them
-    tabcontent = document.getElementsByClassName("tabcontent");
+    tabcontent = document.getElementsByClassName(cl);
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
@@ -144,6 +207,6 @@ function changeTab(evt, tab) {
     }
 
     // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(tab).style.display = "block";
+    gEle(tab).style.display = "block";
     evt.currentTarget.className += " active";
 }

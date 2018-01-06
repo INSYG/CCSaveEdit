@@ -9,11 +9,12 @@
 
 <body>
     <div class="tab">
-        <button class="tablinks" onclick="changeTab(event, 'file')" id="default">File</button>
-        <button class="tablinks" onclick="changeTab(event, 'player')" id="onload">Player</button>
-        <button class="tablinks" onclick="changeTab(event, 'inventory')">Inventory</button>
-        <button class="tablinks" onclick="changeTab(event, 'decrypted')">Decrypted</button>
-        <button class="tablinks" onclick="changeTab(event, 'spaced')">Spaced</button>
+        <button class="tablinks" onclick="changeTab(event, 'tabcontent', 'file')" id="default">File</button>
+        <button class="tablinks" onclick="changeTab(event, 'tabcontent', 'player')" id="onload">Player</button>
+        <button class="tablinks" onclick="changeTab(event, 'tabcontent', 'inventory')">Inventory</button>
+        <!--<button class="tablinks" onclick="changeTab(event, 'tabcontent', 'flags')">Flags</button>-->
+        <button class="tablinks" onclick="changeTab(event, 'tabcontent', 'decrypted')">Decrypted</button>
+        <button class="tablinks" onclick="changeTab(event, 'tabcontent', 'spaced')">Spaced</button>
     </div>
 
     <div id="file" class="tabcontent">
@@ -50,9 +51,58 @@
     </div>
 
     <div id="inventory" class="tabcontent">
-        <button onclick="updateFromInventory()">Apply Changes</button>
-        <p id="itemlist"></p>
+        <button onclick="updateFromInventory()" style="margin-bottom: 5px">Apply Changes</button>
+        <div class="tab">
+            <button class="tablinks" onclick="changeTab(event, 'tabcontentinv', 'invHead')" id="defaultinv">Head</button>
+            <button class="tablinks" onclick="changeTab(event, 'tabcontentinv', 'invWeap')">Weapon</button>
+            <button class="tablinks" onclick="changeTab(event, 'tabcontentinv', 'invTorso')">Torso</button>
+            <button class="tablinks" onclick="changeTab(event, 'tabcontentinv', 'invFeet')">Feet</button>
+            <button class="tablinks" onclick="changeTab(event, 'tabcontentinv', 'invCons')">Consumable</button>
+            <button class="tablinks" onclick="changeTab(event, 'tabcontentinv', 'invKey')">Key</button>
+            <button class="tablinks" onclick="changeTab(event, 'tabcontentinv', 'invTrade')">Trade</button>
+            <button class="tablinks" onclick="changeTab(event, 'tabcontentinv', 'invOther')">Other</button>
+        </div>
+
+        <div id="invHead" class="tabcontentinv">
+            <p id="itemlist0"></p>
+        </div>
+        <div id="invWeap" class="tabcontentinv">
+            <p id="itemlist1"></p>
+        </div>
+        <div id="invTorso" class="tabcontentinv">
+            <p id="itemlist2"></p>
+        </div>
+        <div id="invFeet" class="tabcontentinv">
+            <p id="itemlist3"></p>
+        </div>
+        <div id="invCons" class="tabcontentinv">
+            <p id="itemlist4"></p>
+        </div>
+        <div id="invKey" class="tabcontentinv">
+            <p id="itemlist5"></p>
+        </div>
+        <div id="invTrade" class="tabcontentinv">
+            <p id="itemlist6"></p>
+        </div>
+        <div id="invOther" class="tabcontentinv">
+            <p id="itemlist7"></p>
+        </div>
     </div>
+
+    <!--<div id="flags" class="tabcontent">
+        <button onclick="updateFromFlags()" style="margin-bottom: 5px">Apply Changes</button>
+        <div>Bosses Defeated</div>
+        <div class="indent">
+            <div class="textBoxAlignFlags">Infected Digmo:<input id="bossCold1" type="checkbox" class="textBoxAlignFlags"></div>
+            <div class="textBoxAlignFlags">X01 Driller H.F.S.:<input id="bossCold2" type="checkbox" class="textBoxAlignFlags"></div>
+            <div class="textBoxAlignFlags">Pinzo'jrahrrrn:<input id="bossHeat1" type="checkbox" class="textBoxAlignFlags"></div>
+            <div class="textBoxAlignFlags">Master Magmoth:<input id="bossHeat2" type="checkbox" class="textBoxAlignFlags"></div>
+            <div class="textBoxAlignFlags">Plasma Phantom:<input id="bossWave" type="checkbox" class="textBoxAlignFlags"></div>
+            <div class="textBoxAlignFlags">Sir Blobus Starnikus:<input id="bossShock" type="checkbox" class="textBoxAlignFlags"></div>
+            <div class="textBoxAlignFlags">Son of the East:<input id="bossGrand1" type="checkbox" class="textBoxAlignFlags"></div>
+            <div class="textBoxAlignFlags">Ancient Guardian:<input id="bossGrand2" type="checkbox" class="textBoxAlignFlags"></div>
+        </div>
+    </div>-->
 
     <div id="decrypted" class="tabcontent">
         <button onclick="updateFromDecrypted()" style="margin-bottom: 5px">Apply Changes</button>

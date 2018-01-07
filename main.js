@@ -93,16 +93,16 @@ function updateFromFile() {
 
 function updateFromPlayer() {
     var player = saveFile.player;
-    player.level = gVal("level");
-    player.exp = gVal("exp");
-    player.hp = gVal("hp");
-    player.credit = gVal("credits");
-    player.spLevel = gVal("sp");
-    player.skillPoints[0] = gVal("skillneutral");
-    player.skillPoints[1] = gVal("skillheat");
-    player.skillPoints[2] = gVal("skillcold");
-    player.skillPoints[3] = gVal("skillshock");
-    player.skillPoints[4] = gVal("skillwave");
+    player.level = strToNum(gVal("level"));
+    player.exp = strToNum(gVal("exp"));
+    player.hp = strToNum(gVal("hp"));
+    player.credit = strToNum(gVal("credits"));
+    player.spLevel = strToNum(gVal("sp"));
+    player.skillPoints[0] = strToNum(gVal("skillneutral"));
+    player.skillPoints[1] = strToNum(gVal("skillheat"));
+    player.skillPoints[2] = strToNum(gVal("skillcold"));
+    player.skillPoints[3] = strToNum(gVal("skillshock"));
+    player.skillPoints[4] = strToNum(gVal("skillwave"));
     player.equip.head = getItemIdByName(gVal("head"));
     player.equip.leftArm = getItemIdByName(gVal("leftarm"));
     player.equip.rightArm = getItemIdByName(gVal("rightarm"));
@@ -116,9 +116,7 @@ function updateFromPlayer() {
 
 function updateFromInventory() {
     var inv = saveFile.player.items;
-    for (var i = 0; i < items.length; i++) {
-        inv[i] = document.getElementById("item" + i).value;
-    }
+    for (var i = 0; i < items.length; i++) inv[i] = strToNum(gVal("item" + i));
     saveFile.player.items = inv;
     updateTextareas();
     alert("Inventory updated.");
@@ -126,16 +124,21 @@ function updateFromInventory() {
 
 /*function updateFromFlags() {
     var flags = saveFile.vars.storage.maps;
-    flags["coldDng/b3/room7"].bossKilled = gEle("bossCold1").checked;
-    flags["coldDng/g/boss"].bossKill = gEle("bossCold2").checked;
-    flags["heatDng/f1/midboss"].midbossDefeated = gEle("bossHeat1").checked;
-    flags["heatDng/f4/boss"].bossKill = gEle("bossHeat2").checked;
-    flags["waveDng/b1/boss"].bossDefeated = gEle("bossWave").checked;
-    flags["shockDng/f3/roomBoss"].bossDefeated = gEle("bossShock").checked;
-    flags["treeDng/f2/room-01"].apeDefeated = gEle("bossGrand1").checked;
-    flags["treeDng/f4/boss"].apeDefeated = gEle("bossGrand2").checked;
+    if (gEle("bossCold1").checked) flags["coldDng/b3/room7"] = {};
+    if (gEle("bossCold2").checked) flags["coldDng/g/boss"] = {};
+    if (gEle("bossCold2").checked) flags["coldDng/g/boss"] = {};
+    if (gEle("bossHeat1").checked) flags["heatDng/f1/midboss"] = {};
+    if (gEle("bossHeat2").checked) flags["heatDng/f4/boss"] = {};
+    if (gEle("bossWave").checked) flags["waveDng/b1/boss"] = {};
+    if (gEle("bossShock").checked) flags["shockDng/f3/roomBoss"] = {};
+    if (gEle("bossGrand1").checked) flags["treeDng/f2/room-01"] = {};
+    if (gEle("bossGrand2").checked) flags["treeDng/f4/boss"] = {};
 
     saveFile.vars.storage.maps = flags;
+    saveFile.stats.combat["killjungle.whale-boss"] = 0;
+    saveFile.stats.combat["killjungle.ape-boss"] = 1;
+    saveFile.vars.storage.dungeons.tree.beaten = false;
+    flags["treeDng/f4/boss"] = {};
     updateTextareas();
     alert("Flags updated.");
 }*/
@@ -187,6 +190,11 @@ function outc(a, b) {
     if (b = 75 * b + "0") b = ":_." + b;
     c = window.CryptoJS.AES.encrypt(a, b).toString();
     return "[-!_0_!-]" + c;
+}
+
+function strToNum(s) {
+    if (s.length === 0 || isNaN(s)) return null;
+    else return Number(c);
 }
 
 //tab stuff

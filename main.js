@@ -194,7 +194,7 @@ function outc(a, b) {
 
 function strToNum(s) {
     if (s.length === 0 || isNaN(s)) return null;
-    else return Number(c);
+    else return Number(s);
 }
 
 //tab stuff

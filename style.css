@@ -18,6 +18,11 @@ div.textBoxAlignEquip {
     height: 25px
 }
 
+div.textBoxAlignFavs {
+    width: 190px;
+    height: 25px
+}
+
 div.textBoxAlignFlags {
     width: 250px;
     height: 25px
@@ -38,6 +43,11 @@ input.textBoxAlignItem {
 input.textBoxAlignEquip {
     float: right;
     width: 150px;
+}
+
+input.textBoxAlignFavs {
+    float: right;
+    width: 135px;
 }
 
 input.textBoxAlignFlags {

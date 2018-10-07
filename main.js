@@ -1,5 +1,6 @@
 var saveFile;
 var items = itemj.items;
+var itemFavCount = 0;
 var invsort = [[],[],[],[],[],[],[],[]];
 
 document.getElementById("default").click();
@@ -75,6 +76,13 @@ function updateFromFile() {
     gEle("torso").value = getItemNameById(player.equip.torso);
     gEle("feet").value = getItemNameById(player.equip.feet);
 
+    itemFavCount = player.itemFavs.length;
+    var itemFavStr = "";
+    for (var i = 0; i < itemFavCount; i++) {
+        itemFavStr += '<div class="textBoxAlignFavs">' + (i+1) + '/' + itemFavCount + ':<input id="favlist' + i + '" type="text" class="textBoxAlignFavs" value="' + getItemNameById(player.itemFavs[i]) + '"></div>';
+    }
+    document.getElementById("favlist").innerHTML = itemFavStr;
+
     /*var flags = saveFile.vars.storage.maps;
     gEle("bossCold1").checked = flags["coldDng/b3/room7"].bossKilled;
     gEle("bossCold2").checked = flags["coldDng/g/boss"].bossKill;
@@ -108,6 +116,10 @@ function updateFromPlayer() {
     player.equip.rightArm = getItemIdByName(gVal("rightarm"));
     player.equip.torso = getItemIdByName(gVal("torso"));
     player.equip.feet = getItemIdByName(gVal("feet"));
+
+    var favs = player.itemFavs;
+    for (var i = 0; i < itemFavCount; i++) if (getItemIdByName(gVal("favlist" + i)) != -1) favs[i] = getItemIdByName(gVal("favlist" + i));
+    player.itemFavs = favs;
 
     saveFile.player = player;
     updateTextareas();

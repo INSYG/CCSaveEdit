@@ -1,6 +1,5 @@
 var saveFile;
 var items = itemj.items;
-var itemFavCount = 0;
 var invsort = [[],[],[],[],[],[],[],[]];
 
 document.getElementById("default").click();
@@ -76,10 +75,8 @@ function updateFromFile() {
     gEle("torso").value = getItemNameById(player.equip.torso);
     gEle("feet").value = getItemNameById(player.equip.feet);
 
-    itemFavCount = player.itemFavs.length;
-    var itemFavStr = "";
-    for (var i = 0; i < itemFavCount; i++) {
-        itemFavStr += '<div class="textBoxAlignFavs">' + (i+1) + '/' + itemFavCount + ':<input id="favlist' + i + '" type="text" class="textBoxAlignFavs" value="' + getItemNameById(player.itemFavs[i]) + '"></div>';
+    for (var i = 0; i < player.itemFavs.length && i < 12; i++) {
+        gEle("favlist" + i).value = getItemNameById(player.itemFavs[i]);
     }
     document.getElementById("favlist").innerHTML = itemFavStr;
 
@@ -118,7 +115,7 @@ function updateFromPlayer() {
     player.equip.feet = getItemIdByName(gVal("feet"));
 
     var favs = player.itemFavs;
-    for (var i = 0; i < itemFavCount; i++) if (getItemIdByName(gVal("favlist" + i)) != -1) favs[i] = getItemIdByName(gVal("favlist" + i));
+    for (var i = 0; i < 12; i++) if (getItemIdByName(gVal("favlist" + i)) != -1) favs[i] = getItemIdByName(gVal("favlist" + i));
     player.itemFavs = favs;
 
     saveFile.player = player;

@@ -114,7 +114,7 @@ function updateFromPlayer() {
     player.equip.torso = getItemIdByName(gVal("torso"));
     player.equip.feet = getItemIdByName(gVal("feet"));
 
-    var favs = player.itemFavs;
+    var favs = [];
     for (var i = 0; i < 12; i++) if (getItemIdByName(gVal("favlist" + i)) != -1) favs[i] = getItemIdByName(gVal("favlist" + i));
     player.itemFavs = favs;
 

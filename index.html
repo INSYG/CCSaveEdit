@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <script src="c.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -18,35 +18,37 @@
     </div>
 
     <div id="file" class="tabcontent">
-        <div><button id="load" onclick="load()">Load Save</button></div>
+        <p>Press F10 in the game and then copy&paste the upper part into here.</p>
         <div style="margin-top: 5px"><textarea id="loadtext" rows=35 cols=80 onclick="this.focus();this.select()"></textarea></div>
+        <div><button id="load" onclick="load()">Load Save</button></div>
+        <p>After editing and saving copy this part again and paste into the lower part ingame</p>
     </div>
 
     <div id="player" class="tabcontent">
         <button onclick="updateFromPlayer()" style="margin-bottom: 5px">Apply Changes</button>
         <div>Stats</div>
         <div class="indent">
-            <div class="textBoxAlign">Level:<input id="level" type="text" class="textBoxAlign"></div>
-            <div class="textBoxAlign">EXP:<input id="exp" type="text" class="textBoxAlign"></div>
-            <div class="textBoxAlign">HP:<input id="hp" type="text" class="textBoxAlign"></div>
-            <div class="textBoxAlign">Credits:<input id="credits" type="text" class="textBoxAlign"></div>
-            <div class="textBoxAlign">SP Lvl:<input id="sp" type="text" class="textBoxAlign"></div>
+            <div class="zebra"><div class="textBoxAlign"><label>Level:<input id="level" type="text" class="textBoxAlign"></label></div></div>
+            <div class="zebra"><div class="textBoxAlign"><label>EXP:<input id="exp" type="text" class="textBoxAlign"></label></div></div>
+            <div class="zebra"><div class="textBoxAlign"><label>HP:<input id="hp" type="text" class="textBoxAlign"></label></div></div>
+            <div class="zebra"><div class="textBoxAlign"><label>Credits:<input id="credits" type="text" class="textBoxAlign"></label></div></div>
+            <div class="zebra"><div class="textBoxAlign"><label>SP Lvl:<input id="sp" type="text" class="textBoxAlign"></label></div></div>
         </div>
         Skill Points
         <div class="indent">
-            <div class="textBoxAlign">Neutral:<input id="skillneutral" type="text" class="textBoxAlign"></div>
-            <div class="textBoxAlign">Heat:<input id="skillheat" type="text" class="textBoxAlign"></div>
-            <div class="textBoxAlign">Cold:<input id="skillcold" type="text" class="textBoxAlign"></div>
-            <div class="textBoxAlign">Shock:<input id="skillshock" type="text" class="textBoxAlign"></div>
-            <div class="textBoxAlign">Wave:<input id="skillwave" type="text" class="textBoxAlign"></div>
+            <div class="zebra"><div class="textBoxAlign"><label>Neutral:<input id="skillneutral" type="text" class="textBoxAlign"></label></div></div>
+            <div class="zebra"><div class="textBoxAlign"><label>Heat:<input id="skillheat" type="text" class="textBoxAlign"></label></div></div>
+            <div class="zebra"><div class="textBoxAlign"><label>Cold:<input id="skillcold" type="text" class="textBoxAlign"></label></div></div>
+            <div class="zebra"><div class="textBoxAlign"><label>Shock:<input id="skillshock" type="text" class="textBoxAlign"></label></div></div>
+            <div class="zebra"><div class="textBoxAlign"><label>Wave:<input id="skillwave" type="text" class="textBoxAlign"></label></div></div>
         </div>
         Equips
         <div class="indent">
-            <div class="textBoxAlignEquip">Head:<input id="head" type="text" class="textBoxAlignEquip"></div>
-            <div class="textBoxAlignEquip">Left Arm:<input id="leftarm" type="text" class="textBoxAlignEquip"></div>
-            <div class="textBoxAlignEquip">Right Arm:<input id="rightarm" type="text" class="textBoxAlignEquip"></div>
-            <div class="textBoxAlignEquip">Torso:<input id="torso" type="text" class="textBoxAlignEquip"></div>
-            <div class="textBoxAlignEquip">Feet:<input id="feet" type="text" class="textBoxAlignEquip"></div>
+            <div class="zebra"><div class="textBoxAlignEquip"><label>Head:<input id="head" type="text" class="textBoxAlignEquip"></label></div></div>
+            <div class="zebra"><div class="textBoxAlignEquip"><label>Left Arm:<input id="leftarm" type="text" class="textBoxAlignEquip"></label></div></div>
+            <div class="zebra"><div class="textBoxAlignEquip"><label>Right Arm:<input id="rightarm" type="text" class="textBoxAlignEquip"></label></div></div>
+            <div class="zebra"><div class="textBoxAlignEquip"><label>Torso:<input id="torso" type="text" class="textBoxAlignEquip"></label></div></div>
+            <div class="zebra"><div class="textBoxAlignEquip"><label>Feet:<input id="feet" type="text" class="textBoxAlignEquip"></label></div></div>
         </div>
     </div>
 
@@ -114,8 +116,6 @@
         <div><textarea id="savespaced" rows=37 cols=80></textarea></div>
     </div>
 
-    <script type="text/javascript" src="itemj.js"></script>
     <script type="text/javascript" src="main.js"></script>
 </body>
-
 </html>

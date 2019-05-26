@@ -1,3 +1,12 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 div.indent {
     margin-left: 10px;
     margin-top: 5px
@@ -8,40 +17,36 @@ div.textBoxAlign {
     height: 25px
 }
 
-div.textBoxAlignItem {
-    width: 220px;
-    height: 25px
-}
-
-div.textBoxAlignEquip {
-    width: 235px;
-    height: 25px
-}
-
+div.textBoxAlignItem,
+div.textBoxAlignEquip,
 div.textBoxAlignFlags {
-    width: 250px;
+    width: 300px;
     height: 25px
 }
 
-input.textBoxAlign {
+input.textBoxAlign,
+input.textBoxAlignItem,
+input.textBoxAlignEquip,
+input.textBoxAlignFlags {
     float: right;
-    width: 55px;
-    text-align: right;
+    height: 21px;
 }
 
 input.textBoxAlignItem {
-    float: right;
     width: 25px;
     text-align: right;
 }
 
+input.textBoxAlign {
+    width: 55px;
+    text-align: right;
+}
+
 input.textBoxAlignEquip {
-    float: right;
     width: 150px;
 }
 
 input.textBoxAlignFlags {
-    float: right;
     width: 100px;
 }
 
@@ -79,4 +84,20 @@ input.textBoxAlignFlags {
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
+}
+
+label {
+    display: inline-block;
+    min-width: 230px;
+    vertical-align: middle;
+}
+
+.zebra {
+    height: 21px;
+    margin-bottom: 2px;
+    padding-left: 5px;
+}
+
+.zebra:nth-child(odd) {
+    background: #f1f1f1;
 }

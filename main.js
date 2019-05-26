@@ -60,12 +60,15 @@ loadJSON(function (response) {
             else type = "other";
 
             var elementId = "item" + invsort[k][j].ind;
-            itemstr += '<div class="textBoxAlignItem">' +
-                '<label for="' + elementId + '">' +
-                '<img alt="i" src="icon/' + type + item.rarity + ".png\"> " +
-                item.name.en_US +
-                '</label>' +
-                '<input id="' + elementId + '" type="text" class="textBoxAlignItem">' +
+            itemstr +=
+                '<div class="zebra">' +
+                    '<div class="textBoxAlignItem">' +
+                        '<label for="' + elementId + '">' +
+                            '<img alt="i" src="icon/' + type + item.rarity + ".png\"> " +
+                            item.name.en_US +
+                        '</label>' +
+                        '<input id="' + elementId + '" type="text" class="textBoxAlignItem">' +
+                    '</div>' +
                 '</div>';
             itemCount++;
         }
@@ -189,7 +192,18 @@ function updateTextareas() {
 }
 
 function getItemNameById(n) {
-    return items[n].name.en_US;
+    try {
+        return items[n].name.en_US;
+    } catch (e) {
+        console.warn('Item ', n, 'not found in en_US, trying de_DE...');
+
+        try {
+            return items[n].name.de_DE;
+        } catch (e) {
+            console.error('Item ', n, 'not found in de_DE, giving up.');
+            return 'ITEM NOT FOUND';
+        }
+    }
 }
 
 function getItemIdByName(s) {

@@ -58,7 +58,15 @@ loadJSON(function (response) {
             else if (k === 5) type = "key";
             else if (k === 6) type = "trade";
             else type = "other";
-            itemstr += '<div class="textBoxAlignItem"><img alt="i" src="icon/' + type + item.rarity + ".png\">" + item.name.en_US + '<input id="item' + invsort[k][j].ind + '" type="text" class="textBoxAlignItem"></div>';
+
+            var elementId = "item" + invsort[k][j].ind;
+            itemstr += '<div class="textBoxAlignItem">' +
+                '<label for="' + elementId + '">' +
+                '<img alt="i" src="icon/' + type + item.rarity + ".png\"> " +
+                item.name.en_US +
+                '</label>' +
+                '<input id="' + elementId + '" type="text" class="textBoxAlignItem">' +
+                '</div>';
             itemCount++;
         }
         document.getElementById("itemlist" + k).innerHTML = itemstr;

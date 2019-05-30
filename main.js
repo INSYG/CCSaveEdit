@@ -75,6 +75,10 @@ function updateFromFile() {
     gEle("torso").value = getItemNameById(player.equip.torso);
     gEle("feet").value = getItemNameById(player.equip.feet);
 
+    for (var i = 0; i < player.itemFavs.length && i < 12; i++) {
+        gEle("favlist" + i).value = getItemNameById(player.itemFavs[i]);
+    }
+
     /*var flags = saveFile.vars.storage.maps;
     gEle("bossCold1").checked = flags["coldDng/b3/room7"].bossKilled;
     gEle("bossCold2").checked = flags["coldDng/g/boss"].bossKill;
@@ -108,6 +112,10 @@ function updateFromPlayer() {
     player.equip.rightArm = getItemIdByName(gVal("rightarm"));
     player.equip.torso = getItemIdByName(gVal("torso"));
     player.equip.feet = getItemIdByName(gVal("feet"));
+
+    var favs = [];
+    for (var i = 0; i < 12; i++) if (getItemIdByName(gVal("favlist" + i)) != -1) favs[i] = getItemIdByName(gVal("favlist" + i));
+    player.itemFavs = favs;
 
     saveFile.player = player;
     updateTextareas();

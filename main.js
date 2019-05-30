@@ -78,7 +78,6 @@ function updateFromFile() {
     for (var i = 0; i < player.itemFavs.length && i < 12; i++) {
         gEle("favlist" + i).value = getItemNameById(player.itemFavs[i]);
     }
-    document.getElementById("favlist").innerHTML = itemFavStr;
 
     /*var flags = saveFile.vars.storage.maps;
     gEle("bossCold1").checked = flags["coldDng/b3/room7"].bossKilled;
